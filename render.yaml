@@ -1,17 +1,33 @@
+version: '3.8'
+
 services:
-  - type: web
-    name: uni-connect
-    env: python
-    region: oregon
-    plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn --bind 0.0.0.0:10000 app:app"
-    envVars:
-      - key: MYSQL_HOST
-        value: localhost
-      - key: MYSQL_USER
-        value: root
-      - key: MYSQL_PASSWORD
-        value: 
-      - key: MYSQL_DB
-        value: academic_support_system
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_DATABASE: academic_support_system
+      MYSQL_USER: root
+      MYSQL_PASSWORD: name
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:5000 app:app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    environment:
+      FLASK_ENV: development
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: name
+      MYSQL_DB: academic_support_system
+
+volumes:
+  mysql-data:
