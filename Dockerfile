@@ -7,6 +7,11 @@ ENV SECRET_KEY='your_secret_key'
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
+# Install zbar shared library
+RUN apt-get update && apt-get install -y \
+    zbar-tools \
+    libzbar0
+
 # Copy the current directory contents into the container at /usr/src/app
 COPY . .
 
