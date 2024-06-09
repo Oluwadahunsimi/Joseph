@@ -21,7 +21,7 @@ app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST', 'localhost')
 app.config['MYSQL_USER'] = os.getenv('MYSQL_USER', 'root')
 app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD', 'name')
 app.config['MYSQL_DB'] = os.getenv('MYSQL_DB', 'academic_support_system')
-app.config['MYSQL_CURSORCLASS'] =('MYSQL_CURSORCLASS','DictCursor')
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor' 
 
 
 mysql = MySQL(app)
