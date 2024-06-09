@@ -12,9 +12,11 @@ services:
       - key: MYSQL_DATABASE
         value: academic_support_system
       - key: MYSQL_USER
-        value: root
+        value: jade
       - key: MYSQL_PASSWORD
         value: name
+      - key: MYSQL_HOST
+        value: db
       - key: FLASK_ENV
         value: development
 
@@ -27,7 +29,7 @@ databases:
       - name: MYSQL_DATABASE
         value: academic_support_system
       - name: MYSQL_USER
-        value: root
+        value: jade
       - name: MYSQL_PASSWORD
         value: name
       - name: MYSQL_ROOT_PASSWORD
