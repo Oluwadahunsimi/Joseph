@@ -8,16 +8,21 @@ from datetime import datetime
 import cv2
 from pyzbar.pyzbar import decode
 import numpy as np
+import os
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-# Database configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'academic_support_system'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+# app.py or your config file
+
+
+
+app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST', 'localhost')
+app.config['MYSQL_USER'] = os.getenv('MYSQL_USER', 'root')
+app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD', 'name')
+app.config['MYSQL_DB'] = os.getenv('MYSQL_DB', 'academic_support_system')
+app.config['MYSQL_CURSORCLASS'] =('MYSQL_CURSORCLASS','DictCursor')
+
 
 mysql = MySQL(app)
 def create_tables():
