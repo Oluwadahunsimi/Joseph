@@ -10,7 +10,8 @@ WORKDIR /usr/src/app
 # Install zbar shared library
 RUN apt-get update && apt-get install -y \
     zbar-tools \
-    libzbar0
+    libzbar0 \
+    && apt-get clean
 
 # Copy the current directory contents into the container at /usr/src/app
 COPY . .
