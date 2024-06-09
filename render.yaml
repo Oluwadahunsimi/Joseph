@@ -1,33 +1,34 @@
-version: '3.8'
-
 services:
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: your_root_password
-      MYSQL_DATABASE: academic_support_system
-      MYSQL_USER: root
-      MYSQL_PASSWORD: name
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
+  - type: web
+    name: joseph-1
+    env: docker
+    region: oregon
+    plan: free
+    buildCommand: docker-compose build
+    startCommand: docker-compose up
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        value: your_root_password
+      - key: MYSQL_DATABASE
+        value: academic_support_system
+      - key: MYSQL_USER
+        value: root
+      - key: MYSQL_PASSWORD
+        value: name
+      - key: FLASK_ENV
+        value: development
 
-  web:
-    build: .
-    command: gunicorn --bind 0.0.0.0:5000 app:app
-    ports:
-      - "5000:5000"
-    depends_on:
-      - mysql
-    environment:
-      FLASK_ENV: development
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: name
-      MYSQL_DB: academic_support_system
-
-volumes:
-  mysql-data:
+databases:
+  - name: joseph-db
+    type: mysql
+    region: oregon
+    plan: free
+    properties:
+      - name: MYSQL_DATABASE
+        value: academic_support_system
+      - name: MYSQL_USER
+        value: root
+      - name: MYSQL_PASSWORD
+        value: name
+      - name: MYSQL_ROOT_PASSWORD
+        value: your_root_password
