@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .notifications-container {
+            list-style-type: none;
+            padding: 0;
+        }
+        .notifications-container li {
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .notifications-container li:hover {
+            background-color: #f1f1f1;
+        }
+        .notification-text {
+            font-size: 16px;
+            color: #555;
+        }
+        .feedback-form {
+            margin-top: 10px;
+        }
+        .feedback-form textarea {
+            width: 100%;
+            height: 60px;
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .feedback-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .feedback-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Notifications</h1>
+        <ul class="notifications-container">
+            {% if notifications %}
+                {% for notification in notifications %}
+                    <li>
+                        <div class="notification-text">
+                            {% if session['role'] == 'Lecturer' %}
+                                Appointment with {{ notification['student_name'] }} (Matric No: {{ notification['student_matric_no'] }}, Level: {{ notification['student_level'] }}) on {{ notification['appointment_time'] }}
+                            {% elif session['role'] == 'Student' %}
+                                Appointment with {{ notification['lecturer_email'] }} on {{ notification['appointment_time'] }}
+                            {% endif %}
+                        </div>
+                        {% if session['role'] == 'Lecturer' %}
+                            <div class="feedback-form">
+                                <form action="{{ url_for('send_feedback') }}" method="POST">
+                                    <textarea name="feedback" placeholder="Enter your feedback here..."></textarea>
+                                    <input type="hidden" name="appointment_id" value="{{ notification['id'] }}">
+                                    <button type="submit">Send Feedback</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>
+                    <div class="notification-text">No notifications available.</div>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>
