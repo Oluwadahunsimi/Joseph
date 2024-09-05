@@ -2,77 +2,118 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View Attendance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Records</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2 {
-            text-align: center;
-            color: #333;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
         }
         th, td {
-            padding: 12px;
+            border: 1px solid black;
+            padding: 8px;
             text-align: left;
         }
         th {
             background-color: #f2f2f2;
         }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Attendance Records</h1>
-
-        {% if session['role'] == 'Lecturer' %}
-            <h2>Attendance for Your Classes</h2>
-        {% elif session['role'] == 'Student' %}
-            <h2>Your Attendance Records</h2>
-        {% endif %}
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Student Name</th>
-                    <th>Matric Number</th>
-                    <th>Course</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for record in attendance_records %}
-                    <tr>
-                        <td>{{ record.student_name }}</td>
-                        <td>{{ record.matric_no }}</td>
-                        <td>{{ record.course_name }}</td>
-                        <td>{{ record.date }}</td>
-                        <td>{{ record.status }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <h1>Attendance Records</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Course ID</th>
+                <th>Course Name</th>
+                <th>Student ID</th>
+                <th>Date</th>
+                <th>Present</th>
+                <th>Mark</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CMP401</td>
+                <td>Introduction to Computer Science</td>
+                <td>STU001</td>
+                <td>2023-07-15</td>
+                <td>Yes</td>
+                <td>5.0</td>
+            </tr>
+            <tr>
+                <td>CMP402</td>
+                <td>Data Structures</td>
+                <td>STU002</td>
+                <td>2023-07-15</td>
+                <td>No</td>
+                <td>0.0</td>
+            </tr>
+            <tr>
+                <td>CMP401</td>
+                <td>Introduction to Computer Science</td>
+                <td>STU003</td>
+                <td>2023-07-15</td>
+                <td>Yes</td>
+                <td>4.5</td>
+            </tr>
+            <tr>
+                <td>CMP403</td>
+                <td>Algorithms</td>
+                <td>STU004</td>
+                <td>2023-07-16</td>
+                <td>Yes</td>
+                <td>5.0</td>
+            </tr>
+            <tr>
+                <td>CMP404</td>
+                <td>Computer Architecture</td>
+                <td>STU005</td>
+                <td>2023-07-16</td>
+                <td>No</td>
+                <td>0.0</td>
+            </tr>
+            <tr>
+                <td>CMP405</td>
+                <td>Operating Systems</td>
+                <td>STU006</td>
+                <td>2023-07-17</td>
+                <td>Yes</td>
+                <td>5.0</td>
+            </tr>
+            <tr>
+                <td>CMP406</td>
+                <td>Databases</td>
+                <td>STU007</td>
+                <td>2023-07-17</td>
+                <td>No</td>
+                <td>0.0</td>
+            </tr>
+            <tr>
+                <td>CMP407</td>
+                <td>Networking</td>
+                <td>STU008</td>
+                <td>2023-07-18</td>
+                <td>Yes</td>
+                <td>4.8</td>
+            </tr>
+            <tr>
+                <td>CMP408</td>
+                <td>Software Engineering</td>
+                <td>STU009</td>
+                <td>2023-07-18</td>
+                <td>Yes</td>
+                <td>5.0</td>
+            </tr>
+            <tr>
+                <td>CMP409</td>
+                <td>Machine Learning</td>
+                <td>STU010</td>
+                <td>2023-07-19</td>
+                <td>Yes</td>
+                <td>4.7</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
